@@ -1,0 +1,84 @@
+{% extends 'base.html' %}
+{% block title %}BMI Calculator{% endblock %}
+{% block css %}
+<style>
+.bmi-section {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    height: 80vh;
+    color: #C19A6B;
+    background-color: #001f3f;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.2);
+    margin: 40px auto;
+    width: 90%;
+    max-width: 600px;
+    padding: 30px;
+}
+
+.bmi-section h2 {
+    font-size: 32px;
+    margin-bottom: 15px;
+    color: #ffffff;
+}
+
+.bmi-section p {
+    font-size: 16px;
+    margin-bottom: 25px;
+    color: #C19A6B;
+}
+
+.bmi-section input {
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+    font-size: 16px;
+    color: #001f3f;
+}
+
+.height-inputs {
+    display: flex;
+    gap: 10px;
+}
+
+.bmi-section button {
+    background-color: #ffffff;
+    color: #001f3f;
+    border: none;
+    padding: 12px 25px;
+    border-radius: 6px;
+    font-size: 18px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.bmi-section button:hover {
+    background-color: #ffffffd7;
+}
+</style>
+{% endblock %}
+
+{% block content %}
+<section class="bmi-section">
+    <h2>🧮 BMI Calculator</h2>
+    <p>Check your Body Mass Index (BMI) to understand your health status and diabetes risk.</p>
+
+    <form method="POST" action="{% url 'bmi' %}">
+        {% csrf_token %}
+
+        <div class="height-inputs">
+            <input type="number" name="height_feet" min="1" max="8" placeholder="Height (feet)" required>
+            <input type="number" name="height_inches" min="0" max="11" placeholder="Height (inches)" required>
+        </div>
+
+        <input type="number" name="weight" step="0.1" placeholder="Weight (in kg)" required>
+
+        <button type="submit">Calculate BMI</button>
+    </form>
+</section>
+{% endblock %}

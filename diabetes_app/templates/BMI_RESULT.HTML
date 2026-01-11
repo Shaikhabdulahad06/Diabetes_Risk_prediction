@@ -1,0 +1,95 @@
+{% extends 'base.html' %}
+
+{% block title %}BMI Result{% endblock %}
+
+{% block css %}
+<style>
+.result-section {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    min-height: 80vh;
+    background-color: #001f3f;
+    color: #C19A6B;
+    border-radius: 10px;
+    width: 90%;
+    max-width: 600px;
+    margin: 40px auto;
+    padding: 30px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+}
+
+.result-section h2 {
+    font-size: 32px;
+    color: #ffffff;
+    margin-bottom: 15px;
+}
+
+.result-section p {
+    font-size: 18px;
+    margin: 10px 0;
+}
+
+.result-card {
+    background: #ffffff;
+    color: #001f3f;
+    padding: 15px 25px;
+    border-radius: 10px;
+    margin: 20px 0;
+    font-size: 22px;
+    font-weight: bold;
+}
+
+.health-status {
+    font-size: 20px;
+    font-weight: 600;
+    color: #ffffff;
+    margin-top: 10px;
+}
+
+.back-button {
+    background-color: #ffffff;
+    color: #001f3f;
+    border: none;
+    padding: 12px 25px;
+    border-radius: 6px;
+    font-size: 18px;
+    cursor: pointer;
+    transition: 0.3s;
+    margin-top: 25px;
+    text-decoration: none;
+}
+
+.back-button:hover {
+    background-color: #ffffffd7;
+}
+</style>
+{% endblock %}
+
+{% block content %}
+<section class="result-section">
+    <h2>🏥 Your BMI Result</h2>
+
+    <div class="result-card">
+        Your BMI: <strong>{{ bmi }}</strong>
+    </div>
+
+    {% if bmi < 18.5 %}
+        <p class="health-status">Status: Underweight</p>
+        <p>Consider a balanced diet rich in proteins and nutrients.</p>
+    {% elif bmi < 24.9 %}
+        <p class="health-status">Status: Normal</p>
+        <p>Keep maintaining a healthy diet and regular exercise.</p>
+    {% elif bmi < 29.9 %}
+        <p class="health-status">Status: Overweight</p>
+        <p>Include more physical activity and reduce high-calorie foods.</p>
+    {% else %}
+        <p class="health-status">Status: Obese</p>
+        <p>Consult a doctor or dietitian for a personalized health plan.</p>
+    {% endif %}
+
+    <a href="{% url 'bmi' %}" class="back-button">🔙 Recalculate BMI</a>
+</section>
+{% endblock %}

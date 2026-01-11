@@ -1,0 +1,72 @@
+{% extends 'base.html' %}
+
+{% block title %}Prediction Result{% endblock %}
+{% block css %}
+<style>
+body {
+    font-family: 'Segoe UI', sans-serif;
+    background-color: #ffffff;
+    margin: 0;
+    padding: 0;
+    color: #333;
+}
+
+.result-section {
+    max-width: 600px;
+    margin: 60px auto;
+    padding: 30px;
+    background: #001f3f;
+    color: #C19A6B;
+    border-radius: 10px;
+    text-align: center;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+}
+
+.result-section h2 {
+    font-size: 28px;
+    margin-bottom: 20px;
+    color: #ffffff;
+}
+
+.result-section p {
+    font-size: 18px;
+    margin: 10px 0;
+}
+
+.result-section ul {
+    text-align: left;
+    margin: 20px auto;
+    max-width: 450px;
+    font-size: 16px;
+}
+
+.result-section li {
+    margin-bottom: 8px;
+}
+</style>
+{% endblock %}
+{% block content %}
+
+<section class="result-section">
+    <h2>Diabetes Risk Prediction Result</h2>
+
+    <p><strong>Risk Level:</strong> {{ risk_level }}</p>
+    <p><strong>Predicted Probability:</strong> {{ probability }}</p>
+
+    <h3>Recommended Preventions & Precautions</h3>
+    <ul>
+        {% for tip in advice %}
+            <li>{{ tip }}</li>
+        {% endfor %}
+    </ul>
+
+<!-- Back Button -->
+<a href="{% url 'index' %}" 
+   style="display:inline-block; margin-top:20px; padding:10px 20px; background:#ffffff; color:#001f3f; 
+          text-decoration:none; border-radius:6px; font-weight:600;">
+   ← Back to Home
+</a>
+
+</section>
+
+{% endblock %}
